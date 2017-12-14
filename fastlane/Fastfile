@@ -1,0 +1,3 @@
+lane :test do
+  icon_versioning
+end
