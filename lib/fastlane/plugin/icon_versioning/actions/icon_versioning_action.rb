@@ -2,7 +2,7 @@ module Fastlane
   module Actions
     class IconVersioningAction < Action
       def self.run(params)
-        UI.message("The icon_versioning plugin is working!")
+        Helper::IconVersioningHelper.run(params)
       end
 
       def self.description
@@ -11,15 +11,6 @@ module Fastlane
 
       def self.authors
         ["Iulian Onofrei"]
-      end
-
-      def self.return_value
-        # If your method provides a return value, you can describe here what it does
-      end
-
-      def self.details
-        # Optional:
-        "Description"
       end
 
       def self.available_options
@@ -33,11 +24,7 @@ module Fastlane
       end
 
       def self.is_supported?(platform)
-        # Adjust this if your plugin only works for a particular platform (iOS vs. Android, for example)
-        # See: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
-        #
-        # [:ios, :mac, :android].include?(platform)
-        true
+        [:ios].include?(platform)
       end
     end
   end
