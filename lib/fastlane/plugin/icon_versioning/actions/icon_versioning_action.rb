@@ -1,3 +1,6 @@
+require 'fastlane/action'
+require_relative '../helper/icon_versioning_helper'
+
 module Fastlane
   module Actions
     class IconVersioningAction < Action
