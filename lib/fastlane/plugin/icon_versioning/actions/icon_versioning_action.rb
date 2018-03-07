@@ -18,11 +18,19 @@ module Fastlane
 
       def self.available_options
         [
-          # FastlaneCore::ConfigItem.new(key: :your_option,
-          #                         env_name: "ICON_VERSIONING_YOUR_OPTION",
-          #                      description: "A description of your option",
-          #                         optional: false,
-          #                             type: String)
+          FastlaneCore::ConfigItem.new(
+            key: :appiconset_path,
+            env_name: 'ICON_VERSIONING_APPICONSET_PATH',
+            description: 'The path to the `.appiconset` directory containing the icon images',
+            verify_block: proc do |value|
+              path = File.expand_path(value.to_s)
+
+              UI.user_error!('Appiconset not found') unless File.exist?(path)
+              UI.user_error!('Appiconset is not a directory') unless File.directory?(path)
+              UI.user_error!('Appiconset must end with .appiconset') unless path.end_with?('.appiconset')
+            end,
+            type: String
+          )
         ]
       end
 
