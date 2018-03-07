@@ -30,6 +30,13 @@ module Fastlane
               UI.user_error!('Appiconset must end with .appiconset') unless path.end_with?('.appiconset')
             end,
             type: String
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :text,
+            env_name: 'ICON_VERSIONING_TEXT',
+            description: 'The text to overlay over the icon images',
+            optional: true,
+            type: String
           )
         ]
       end

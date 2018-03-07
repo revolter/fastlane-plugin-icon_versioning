@@ -2,35 +2,55 @@ describe Fastlane::Actions::IconVersioningAction do
   let(:action) { Fastlane::Actions::IconVersioningAction }
   let(:configuration) { FastlaneCore::Configuration }
 
-  it 'sets the appiconset path when valid' do
-    options = { appiconset_path: File.expand_path('./spec/fixtures/Correct.appiconset') }
+  context 'when passing the appiconset path' do
+    it 'sets the appiconset path when valid' do
+      options = { appiconset_path: File.expand_path('./spec/fixtures/Correct.appiconset') }
 
-    config = configuration.create(action.available_options, options)
+      config = configuration.create(action.available_options, options)
 
-    expect(config[:appiconset_path]).to eq(options[:appiconset_path])
+      expect(config[:appiconset_path]).to eq(options[:appiconset_path])
+    end
+
+    it 'raises an exception when the appiconset isn\'t found' do
+      expect do
+        options = { appiconset_path: File.expand_path('./spec/fixtures/Missing') }
+
+        configuration.create(action.available_options, options)
+      end.to raise_error('Appiconset not found')
+    end
+
+    it 'raises an exception when the appiconset isn\'t a folder' do
+      expect do
+        options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
+
+        configuration.create(action.available_options, options)
+      end.to raise_error('Appiconset is not a directory')
+    end
+
+    it 'raises an exception when the appiconset isn\'t named correctly' do
+      expect do
+        options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
+
+        configuration.create(action.available_options, options)
+      end.to raise_error('Appiconset must end with .appiconset')
+    end
   end
 
-  it 'raises an exception when appiconset path isn\'t found' do
-    expect do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/Missing') }
+  context 'when passing the text' do
+    it 'sets the text when valid' do
+      options = { text: 'test' }
 
-      configuration.create(action.available_options, options)
-    end.to raise_error('Appiconset not found')
-  end
+      config = configuration.create(action.available_options, options)
 
-  it 'raises an exception when appiconset isn\'t a folder' do
-    expect do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
+      expect(config[:text]).to eq(options[:text])
+    end
 
-      configuration.create(action.available_options, options)
-    end.to raise_error('Appiconset is not a directory')
-  end
+    it 'doesn\'t set the text when null' do
+      options = {}
 
-  it 'raises an exception when appiconset isn\'t named correctly' do
-    expect do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
+      config = configuration.create(action.available_options, options)
 
-      configuration.create(action.available_options, options)
-    end.to raise_error('Appiconset must end with .appiconset')
+      expect(config[:text]).to be_nil
+    end
   end
 end
