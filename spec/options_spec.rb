@@ -12,25 +12,25 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when the appiconset isn\'t found' do
-      expect do
-        options = { appiconset_path: File.expand_path('./spec/fixtures/Missing') }
+      options = { appiconset_path: File.expand_path('./spec/fixtures/Missing') }
 
+      expect do
         configuration.create(action.available_options, options)
       end.to raise_error('Appiconset not found')
     end
 
     it 'raises an exception when the appiconset isn\'t a folder' do
-      expect do
-        options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
+      options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
 
+      expect do
         configuration.create(action.available_options, options)
       end.to raise_error('Appiconset is not a directory')
     end
 
     it 'raises an exception when the appiconset isn\'t named correctly' do
-      expect do
-        options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
+      options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
 
+      expect do
         configuration.create(action.available_options, options)
       end.to raise_error('Appiconset does not end with .appiconset')
     end
@@ -64,17 +64,17 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when the percentage is less than 0' do
-      expect do
-        options = { band_height_percentage: -1.3 }
+      options = { band_height_percentage: -1.3 }
 
+      expect do
         configuration.create(action.available_options, options)
       end.to raise_error('Percentage is less than 0')
     end
 
     it 'raises an exception when the percentage is greater than 1' do
-      expect do
-        options = { band_height_percentage: 2.3 }
+      options = { band_height_percentage: 2.3 }
 
+      expect do
         configuration.create(action.available_options, options)
       end.to raise_error('Percentage is greater than 1')
     end
