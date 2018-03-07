@@ -9,11 +9,11 @@ module Fastlane
       end
 
       def self.description
-        "Overlay build information on top of your app icon"
+        'Overlay build information on top of your app icon'
       end
 
       def self.authors
-        ["Iulian Onofrei"]
+        ['Iulian Onofrei']
       end
 
       def self.available_options
