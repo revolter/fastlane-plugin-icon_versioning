@@ -32,7 +32,7 @@ describe Fastlane::Actions::IconVersioningAction do
         options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
 
         configuration.create(action.available_options, options)
-      end.to raise_error('Appiconset must end with .appiconset')
+      end.to raise_error('Appiconset does not end with .appiconset')
     end
   end
 

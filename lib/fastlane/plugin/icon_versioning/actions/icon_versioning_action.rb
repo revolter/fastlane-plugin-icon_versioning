@@ -27,7 +27,7 @@ module Fastlane
 
               UI.user_error!('Appiconset not found') unless File.exist?(path)
               UI.user_error!('Appiconset is not a directory') unless File.directory?(path)
-              UI.user_error!('Appiconset must end with .appiconset') unless path.end_with?('.appiconset')
+              UI.user_error!('Appiconset does not end with .appiconset') unless path.end_with?('.appiconset')
             end,
             type: String
           ),
