@@ -9,11 +9,11 @@ module Fastlane
       end
 
       def self.description
-        'Overlay build information on top of your app icon'
+        'Overlay build information on top of your app icon. Based on original work by Krzysztof Zabłocki (https://github.com/krzysztofzablocki/Bootstrap).'
       end
 
       def self.authors
-        ['Iulian Onofrei']
+        ['Iulian Onofrei', 'Krzysztof Zabłocki']
       end
 
       def self.available_options
