@@ -44,14 +44,6 @@ describe Fastlane::Actions::IconVersioningAction do
 
       expect(config[:text]).to eq(options[:text])
     end
-
-    it 'doesn\'t set the text when null' do
-      options = {}
-
-      config = configuration.create(action.available_options, options)
-
-      expect(config[:text]).to be_nil
-    end
   end
 
   context 'when passing the band height percentage' do

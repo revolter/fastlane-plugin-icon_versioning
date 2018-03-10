@@ -35,7 +35,6 @@ module Fastlane
             key: :text,
             env_name: 'ICON_VERSIONING_TEXT',
             description: 'The text to overlay over the icon images',
-            optional: true,
             type: String
           ),
           FastlaneCore::ConfigItem.new(
