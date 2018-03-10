@@ -71,4 +71,22 @@ describe Fastlane::Actions::IconVersioningAction do
       end.to raise_error('Band height percentage is greater than 1')
     end
   end
+
+  context 'when passing the band blur radius percentage' do
+    it 'sets the value when it is valid' do
+      options = { band_blur_radius_percentage: 5.5 }
+
+      config = configuration.create(action.available_options, options)
+
+      expect(config[:band_blur_radius_percentage]).to eq(options[:band_blur_radius_percentage])
+    end
+
+    it 'raises an exception when it is less than 0' do
+      options = { band_blur_radius_percentage: -3.0 }
+
+      expect do
+        configuration.create(action.available_options, options)
+      end.to raise_error('Band blur radius percentage is less than 0')
+    end
+  end
 end

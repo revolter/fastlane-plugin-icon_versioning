@@ -48,6 +48,17 @@ module Fastlane
             end,
             optional: true,
             type: Float
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :band_blur_radius_percentage,
+            env_name: 'ICON_VERSIONING_BAND_BLUR_RADIUS_PERCENTAGE',
+            description: 'The blur radius percentage of the text band. The default value behaves like an automatic setting which produces the best results. More details: http://www.imagemagick.org/Usage/blur/#blur_args',
+            default_value: 0,
+            verify_block: proc do |value|
+              UI.user_error!('Band blur radius percentage is less than 0') if value < 0
+            end,
+            optional: true,
+            type: Float
           )
         ]
       end
