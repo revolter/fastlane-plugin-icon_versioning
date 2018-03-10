@@ -43,8 +43,8 @@ module Fastlane
             description: 'The percentage of the text band height relative to the image\'s height. A float number between 0 and 1',
             default_value: 0.5,
             verify_block: proc do |value|
-              UI.user_error!('Percentage is less than 0') if value < 0
-              UI.user_error!('Percentage is greater than 1') if value > 1
+              UI.user_error!('Band height percentage is less than 0') if value < 0
+              UI.user_error!('Band height percentage is greater than 1') if value > 1
             end,
             optional: true,
             type: Float
