@@ -5,7 +5,9 @@ module Fastlane
   module Actions
     class IconVersioningAction < Action
       def self.run(params)
-        Helper::IconVersioningHelper.run(params)
+        icon_versioning_helper = Helper::IconVersioningHelper.new(params)
+
+        return icon_versioning_helper.run()
       end
 
       def self.description
