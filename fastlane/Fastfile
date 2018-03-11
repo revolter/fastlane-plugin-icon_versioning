@@ -1,3 +1,8 @@
 lane :test do
-  icon_versioning
+  icon_versioning(
+    appiconset_path: './spec/fixtures/Valid.appiconset',
+    text: "It\nis\nworking"
+  )
+
+  UI.success('Check out "./specs/fixtures/Valid-Versioned.appiconset" for the versioned icons')
 end

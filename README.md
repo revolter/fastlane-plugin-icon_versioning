@@ -14,13 +14,54 @@ fastlane add_plugin icon_versioning
 
 Overlay build information on top of your app icon. Based on original work by Krzysztof Zabłocki (https://github.com/krzysztofzablocki/Bootstrap).
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+This copies the specified `.appiconset` folder to a new folder named `OriginalName-Versioned.appiconset` and overlays the specified `text` over the icon images inside it.
+
+To automatically run this on every build, you can add a new `Run Script` `Build Phase` before the `Compile Sources` one and point it to a script that calls this plugin:
+
+![Run script](./assets/run_script.jpg)
+
+_(Having a script file instead of the actual plugin call makes it easier to debug, change and review it, as explained in [this article](http://www.mokacoding.com/blog/better-build-phase-scripts/))_
+
+```sh
+#!/usr/bin/env bash
+
+# optional, to prevent versioning for release builds
+if [[ $CONFIGURATION == "Release" ]]; then
+    exit 0
+fi
+
+# optional, to fix fastlane warnings that show up in the Report navigator
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# make sure Bundler is found
+export GEM_HOME=~/.gems
+export PATH=$PATH:$GEM_HOME/bin
+
+export FASTLANE_DISABLE_COLORS=1 # optional, to remove from the build log the ANSI escape sequences that enables colors in terminal
+export FASTLANE_SKIP_UPDATE_CHECK=1 # optional, to make sure that the versioning finishes as fast as possible in case there is an available update
+export FASTLANE_HIDE_GITHUB_ISSUES=1 # optional, to make sure that the versioning finishes as fast as possible in case the plugin crashes
+
+bundle exec fastlane run icon_versioning appiconset_path:'/path/to/AppIcon.appiconset' text:'1.2.3 (11.03.2018)\n[ead76f1] {Staging}\nmaster'
+```
+
+In order for the new versioned icon to be actually used by the app, you have to point the `Asset Catalog App Icon Set Name` (`ASSETCATALOG_COMPILER_APPICON_NAME`) build setting to this new versioned one:
+
+![Build setting](./assets/build_setting.jpg)
+
+Lastly, you should ignore the `-Versioned` folders using:
+
+```ini
+/path/to/*-Versioned.appiconset/*
+```
+
+In the end, it should look like this:
+
+![App icon](./assets/app_icon.jpg)
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
-
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
 
 ## Run tests for this plugin
 
