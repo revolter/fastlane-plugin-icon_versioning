@@ -19,7 +19,7 @@ describe Fastlane::Actions::IconVersioningAction do
       end.to raise_error('Appiconset not found')
     end
 
-    it 'raises an exception when it isn\'t a folder' do
+    it 'raises an exception when it isn\'t a directory' do
       options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
 
       expect do
