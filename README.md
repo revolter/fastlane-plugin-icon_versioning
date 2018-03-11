@@ -12,7 +12,7 @@ fastlane add_plugin icon_versioning
 
 ## About icon_versioning
 
-Overlay build information on top of your app icon
+Overlay build information on top of your app icon. Based on original work by Krzysztof Zabłocki (https://github.com/krzysztofzablocki/Bootstrap).
 
 **Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
 
