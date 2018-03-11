@@ -36,16 +36,6 @@ describe Fastlane::Actions::IconVersioningAction do
     end
   end
 
-  context 'when passing the text' do
-    it 'sets the value when it is valid' do
-      options = { text: 'test' }
-
-      config = configuration.create(action.available_options, options)
-
-      expect(config[:text]).to eq(options[:text])
-    end
-  end
-
   context 'when passing the band height percentage' do
     it 'sets the value when it is valid' do
       options = { band_height_percentage: 0.42 }
