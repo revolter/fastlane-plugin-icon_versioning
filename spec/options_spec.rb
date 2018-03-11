@@ -4,7 +4,7 @@ describe Fastlane::Actions::IconVersioningAction do
 
   context 'when passing the appiconset path' do
     it 'sets the value when it is valid' do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/Correct.appiconset') }
+      options = { appiconset_path: './spec/fixtures/Correct.appiconset' }
 
       config = configuration.create(action.available_options, options)
 
@@ -12,7 +12,7 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when it isn\'t found' do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/Missing') }
+      options = { appiconset_path: './spec/fixtures/Missing' }
 
       expect do
         configuration.create(action.available_options, options)
@@ -20,7 +20,7 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when it isn\'t a directory' do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/File.appiconset') }
+      options = { appiconset_path: './spec/fixtures/File.appiconset' }
 
       expect do
         configuration.create(action.available_options, options)
@@ -28,7 +28,7 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when it isn\'t named correctly' do
-      options = { appiconset_path: File.expand_path('./spec/fixtures/Name.incorrect') }
+      options = { appiconset_path: './spec/fixtures/Name.incorrect' }
 
       expect do
         configuration.create(action.available_options, options)
