@@ -71,6 +71,13 @@ module Fastlane
             end,
             optional: true,
             type: Float
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :ignored_icons_regex,
+            env_name: 'ICON_VERSIONING_IGNORED_ICONS_REGEX',
+            description: 'An optional regex that causes the icons that match agains it not to be versioned',
+            optional: true,
+            type: Regexp
           )
         ]
       end
