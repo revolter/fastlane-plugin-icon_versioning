@@ -120,6 +120,7 @@ Layout/SpaceAroundOperators:
   Exclude:
   - "**/spec/actions_specs/xcodebuild_spec.rb"
 AllCops:
+  DisplayCopNames: true
   TargetRubyVersion: 2.0
   Include:
   - "*/lib/assets/*Template"
@@ -170,6 +171,12 @@ Style/MethodCallWithArgsParentheses:
   - to
   - describe
   - it
+  - be
   - context
   - before
   - after
+
+Style/DefWithParentheses:
+  Enabled: false
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false

@@ -69,7 +69,7 @@ module Fastlane
             default_value: 0.05,
             verify_block: proc do |value|
               UI.user_error!('Band blur sigma percentage is less than 0') if value < 0
-              UI.user_error!('Band blur sigma percentage is greater than 65355') if value > 65355
+              UI.user_error!('Band blur sigma percentage is greater than 65355') if value > 65_355
             end,
             optional: true,
             type: Float

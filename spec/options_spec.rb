@@ -98,7 +98,7 @@ describe Fastlane::Actions::IconVersioningAction do
     end
 
     it 'raises an exception when it is greater than 65355' do
-      options = { band_blur_sigma_percentage: 65356.0 }
+      options = { band_blur_sigma_percentage: 65_356.0 }
 
       expect do
         configuration.create(action.available_options, options)
