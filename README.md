@@ -78,6 +78,8 @@ In the end, it should look like this:
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
+You can also check out the [example Xcode project](example) to see it in action, and all the required changes [here](https://github.com/revolter/fastlane-plugin-icon_versioning/compare/30f5447...aa4d743).
+
 ## Run tests for this plugin
 
 To run both the tests, and code style validation, run
