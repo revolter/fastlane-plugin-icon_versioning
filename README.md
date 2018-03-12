@@ -1,6 +1,7 @@
 # icon_versioning plugin
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-icon_versioning)
+[![Build Status](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning.svg?branch=master)](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning)
 
 ## Getting Started
 
