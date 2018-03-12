@@ -1,0 +1,23 @@
+default_platform(:ios)
+
+platform :ios do
+  lane :version_icon do |options|
+    configuration = options[:configuration]
+
+    appiconset_path = './IconVersioningExample/Assets.xcassets/AppIcon.appiconset'
+
+    version = get_version_number()
+    commit = sh('git rev-parse --short=7 HEAD').strip
+    branch = sh('git rev-parse --abbrev-ref HEAD').strip
+    date = Time.now.strftime('%d.%m.%Y')
+
+    text = "#{version} (#{date})\n[#{commit}] {#{configuration}}\n#{branch}"
+
+    icon_versioning(
+      appiconset_path: appiconset_path,
+      text: text,
+      band_height_percentage: 0.4,
+      ignored_icons_regex: /iTunesArtwork/
+    )
+  end
+end

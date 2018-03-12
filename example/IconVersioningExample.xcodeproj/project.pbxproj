@@ -71,6 +71,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54BCC10A205709FA005C870D /* Build configuration list for PBXNativeTarget "IconVersioningExample" */;
 			buildPhases = (
+				54BCC10D20573385005C870D /* [Icon Versioning] Run Script */,
 				54BCC0F4205709FA005C870D /* Sources */,
 				54BCC0F5205709FA005C870D /* Frameworks */,
 				54BCC0F6205709FA005C870D /* Resources */,
@@ -130,6 +131,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		54BCC10D20573385005C870D /* [Icon Versioning] Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Icon Versioning] Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/IconVersioningExample/Scripts/icon_versioning.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54BCC0F4205709FA005C870D /* Sources */ = {
@@ -273,7 +291,7 @@
 		54BCC10B205709FA005C870D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Versioned";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JNPY296VZ2;
 				INFOPLIST_FILE = IconVersioningExample/Info.plist;
