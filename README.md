@@ -2,6 +2,7 @@
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-icon_versioning)
 [![Build Status](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning.svg?branch=master)](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning)
+[![Coverage Status](https://coveralls.io/repos/github/revolter/fastlane-plugin-icon_versioning/badge.svg)](https://coveralls.io/github/revolter/fastlane-plugin-icon_versioning)
 
 ## Getting Started
 
