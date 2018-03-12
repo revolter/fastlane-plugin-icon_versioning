@@ -14,6 +14,15 @@ fastlane add_plugin icon_versioning
 
 Overlay build information on top of your app icon. Based on original work by Krzysztof Zabłocki (https://github.com/krzysztofzablocki/Bootstrap).
 
+### Improvements
+
+Over the original implementation by Krzysztof, I also added:
+- automatic font scaling and blur spreading that ensures a consistent look between different sized icons
+- text lines preservation that doesn't break long lines to prevent unexpected results
+- possibility to specify custom text, band height, blur spread that remain responsive to the icon sizes
+
+### Integrating
+
 This copies the specified `.appiconset` folder to a new folder named `OriginalName-Versioned.appiconset` and overlays the specified `text` over the icon images inside it.
 
 To automatically run this on every build, you can add a new `Run Script` `Build Phase` before the `Compile Sources` one and point it to a script that calls this plugin:
