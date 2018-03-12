@@ -56,6 +56,8 @@ export FASTLANE_HIDE_GITHUB_ISSUES=1 # optional, to make sure that the versionin
 bundle exec fastlane run icon_versioning appiconset_path:'/path/to/AppIcon.appiconset' text:'1.2.3 (11.03.2018)\n[ead76f1] {Staging}\nmaster'
 ```
 
+_Make sure the script is executable by running `chmod +x /scripts/icon_versioning.sh`_
+
 In order for the new versioned icon to be actually used by the app, you have to point the `Asset Catalog App Icon Set Name` (`ASSETCATALOG_COMPILER_APPICON_NAME`) build setting to this new versioned one:
 
 ![Build setting](./assets/build_setting.jpg)
