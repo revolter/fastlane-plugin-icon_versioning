@@ -66,6 +66,8 @@ Lastly, you should ignore the `-Versioned` folders using:
 /path/to/*-Versioned.appiconset/*
 ```
 
+If running it automatically on every build is not what you need, you can also call it from wherever you want, as long as you specify the correct parameters.
+
 In the end, it should look like this:
 
 ![App icon](./assets/app_icon.jpg)
