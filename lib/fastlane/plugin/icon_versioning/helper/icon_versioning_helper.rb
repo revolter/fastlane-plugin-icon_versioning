@@ -1,4 +1,7 @@
+require 'digest'
+require 'fileutils'
 require 'mini_magick'
+require 'yaml'
 
 require 'fastlane_core/ui/ui'
 
@@ -7,6 +10,8 @@ module Fastlane
 
   module Helper
     class IconVersioningHelper
+      CACHE_FILE_NAME = 'cache.yml'.freeze
+
       attr_accessor :appiconset_path
       attr_accessor :text
 
@@ -32,15 +37,36 @@ module Fastlane
 
         Dir.mkdir(versioned_appiconset_path) unless Dir.exist?(versioned_appiconset_path)
 
+        cache_file_path = File.join(versioned_appiconset_path, CACHE_FILE_NAME)
+
+        if File.exist?(cache_file_path)
+          cache = YAML.load_file(cache_file_path)
+        else
+          cache = {}
+        end
+
         Dir.glob("#{self.appiconset_path}/*.png").each do |original_icon_path|
           versioned_icon_path = self.class.get_versioned_path(original_icon_path)
+
+          unless cache[original_icon_path].nil?
+            if File.exist?(versioned_icon_path)
+              versioned_icon_sha = Digest::SHA2.file(versioned_icon_path).hexdigest
+              cached_icon_sha = cache[original_icon_path]
+
+              next if versioned_icon_sha == cached_icon_sha
+            end
+          end
 
           if self.ignored_icons_regex && !(original_icon_path =~ self.ignored_icons_regex).nil?
             FileUtils.copy(original_icon_path, versioned_icon_path)
           else
             version_icon(original_icon_path, versioned_icon_path)
           end
+
+          cache[original_icon_path] = Digest::SHA2.file(versioned_icon_path).hexdigest
         end
+
+        File.open(cache_file_path, 'w') { |file| file.write(cache.to_yaml) }
       end
 
       def self.get_versioned_path(path)

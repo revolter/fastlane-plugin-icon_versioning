@@ -65,5 +65,22 @@ describe Fastlane::Actions::IconVersioningAction do
         expect(FileUtils.identical?(original_icon_path, versioned_icon_path)).to eq(is_ignored)
       end
     end
+
+    it 'versions all the icons except the cached one' do
+      options = {
+        appiconset_path: original_appiconset_path,
+        text: 'test'
+      }
+
+      config = configuration.create(action.available_options, options)
+
+      expect_any_instance_of(action_helper).to receive(:version_icon).twice.and_call_original
+
+      action.run(config)
+
+      expect_any_instance_of(action_helper).to_not receive(:version_icon).and_call_original
+
+      action.run(config)
+    end
   end
 end
