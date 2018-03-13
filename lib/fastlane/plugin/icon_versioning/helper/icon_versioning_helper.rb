@@ -80,7 +80,9 @@ module Fastlane
         return path.gsub(/([^.]+)(\.appiconset)/, '\1-Versioned\2')
       end
 
-      private def version_icon(original_icon_path, versioned_icon_path)
+      private
+
+      def version_icon(original_icon_path, versioned_icon_path)
         image = MiniMagick::Image.open(original_icon_path)
 
         width = image[:width]
@@ -154,7 +156,7 @@ module Fastlane
         File.delete(text_base_icon_path, text_icon_path, temp_icon_path)
       end
 
-      private def suffix(path, text)
+      def suffix(path, text)
         extension = File.extname(path)
 
         return path.gsub(extension, "_#{text}#{extension}")
