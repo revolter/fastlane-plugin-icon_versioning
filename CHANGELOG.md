@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Added draft versioning implementation (b30440b)
+- Added initial versioning implementation (b30440b)
 
 [Unreleased]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.0.0...master
 [1.0.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/fa429ffc...v1.0.0
