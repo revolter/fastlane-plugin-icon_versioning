@@ -29,13 +29,16 @@ module Fastlane
       def run()
         versioned_appiconset_path = self.class.get_versioned_path(self.appiconset_path)
 
-        FileUtils.remove_entry(versioned_appiconset_path, force: true)
-        FileUtils.copy_entry(self.appiconset_path, versioned_appiconset_path)
+        Dir.mkdir(versioned_appiconset_path) unless Dir.exist?(versioned_appiconset_path)
 
-        Dir.glob("#{versioned_appiconset_path}/*.png").each do |icon_path|
-          next if self.ignored_icons_regex && !(icon_path =~ self.ignored_icons_regex).nil?
+        Dir.glob("#{self.appiconset_path}/*.png").each do |original_icon_path|
+          versioned_icon_path = self.class.get_versioned_path(original_icon_path)
 
-          version_icon(icon_path)
+          if self.ignored_icons_regex && !(original_icon_path =~ self.ignored_icons_regex).nil?
+            FileUtils.copy(original_icon_path, versioned_icon_path)
+          else
+            version_icon(original_icon_path, versioned_icon_path)
+          end
         end
       end
 
@@ -43,8 +46,8 @@ module Fastlane
         return path.gsub(/([^.]+)(\.appiconset)/, '\1-Versioned\2')
       end
 
-      private def version_icon(icon_path)
-        image = MiniMagick::Image.open(icon_path)
+      private def version_icon(original_icon_path, versioned_icon_path)
+        image = MiniMagick::Image.open(original_icon_path)
 
         width = image[:width]
         height = image[:height]
@@ -55,14 +58,14 @@ module Fastlane
 
         band_top_position = height - band_height
 
-        blurred_icon_path = suffix(icon_path, 'blurred')
-        mask_icon_path = suffix(icon_path, 'mask')
-        text_base_icon_path = suffix(icon_path, 'text_base')
-        text_icon_path = suffix(icon_path, 'text')
-        temp_icon_path = suffix(icon_path, 'temp')
+        blurred_icon_path = suffix(versioned_icon_path, 'blurred')
+        mask_icon_path = suffix(versioned_icon_path, 'mask')
+        text_base_icon_path = suffix(versioned_icon_path, 'text_base')
+        text_icon_path = suffix(versioned_icon_path, 'text')
+        temp_icon_path = suffix(versioned_icon_path, 'temp')
 
         MiniMagick::Tool::Convert.new do |convert|
-          convert << icon_path
+          convert << original_icon_path
           convert << '-blur' << "#{band_blur_radius}x#{band_blur_sigma}"
           convert << blurred_icon_path
         end
@@ -94,7 +97,7 @@ module Fastlane
         end
 
         MiniMagick::Tool::Convert.new do |convert|
-          convert << icon_path
+          convert << original_icon_path
           convert << blurred_icon_path
           convert << mask_icon_path
           convert << '-composite'
@@ -111,7 +114,7 @@ module Fastlane
           convert << text_icon_path
           convert << '-geometry' << "+0+#{band_top_position}"
           convert << '-composite'
-          convert << icon_path
+          convert << versioned_icon_path
         end
 
         File.delete(text_base_icon_path, text_icon_path, temp_icon_path)

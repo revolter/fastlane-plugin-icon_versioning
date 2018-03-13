@@ -4,9 +4,17 @@ describe Fastlane::Actions::IconVersioningAction do
   let(:configuration) { FastlaneCore::Configuration }
 
   describe '#run' do
+    let(:original_appiconset_path) { './spec/fixtures/Valid.appiconset' }
+
+    before(:each) do
+      versioned_appiconset_path = action_helper.get_versioned_path(original_appiconset_path)
+
+      FileUtils.remove_entry(versioned_appiconset_path, force: true)
+    end
+
     it 'versions the icons in the appiconset directory' do
       options = {
-        appiconset_path: './spec/fixtures/Correct.appiconset',
+        appiconset_path: original_appiconset_path,
         text: 'test'
       }
 
@@ -23,7 +31,7 @@ describe Fastlane::Actions::IconVersioningAction do
 
     it 'versions all the icons in the appiconset directory' do
       options = {
-        appiconset_path: './spec/fixtures/Valid.appiconset',
+        appiconset_path: original_appiconset_path,
         text: 'test'
       }
 
@@ -35,16 +43,16 @@ describe Fastlane::Actions::IconVersioningAction do
 
       expect(Pathname.new(versioned_appiconset_path)).to exist
 
-      Dir.glob("#{versioned_appiconset_path}/*.png").each do |icon_path|
-        original_icon_path = icon_path.gsub(/-Versioned/, '')
+      Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
+        versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
 
-        expect(FileUtils.identical?(original_icon_path, icon_path)).to be false
+        expect(FileUtils.identical?(original_icon_path, versioned_icon_path)).to be false
       end
     end
 
     it 'versions all the icons in the appiconset directory except the ignored one' do
       options = {
-        appiconset_path: './spec/fixtures/Valid.appiconset',
+        appiconset_path: original_appiconset_path,
         text: 'test',
         ignored_icons_regex: /_ultra/
       }
@@ -57,12 +65,12 @@ describe Fastlane::Actions::IconVersioningAction do
 
       expect(Pathname.new(versioned_appiconset_path)).to exist
 
-      Dir.glob("#{versioned_appiconset_path}/*.png").each do |icon_path|
-        original_icon_path = icon_path.gsub(/-Versioned/, '')
+      Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
+        versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
 
-        is_ignored = !(icon_path =~ options[:ignored_icons_regex]).nil?
+        is_ignored = !(original_icon_path =~ options[:ignored_icons_regex]).nil?
 
-        expect(FileUtils.identical?(original_icon_path, icon_path)).to eq(is_ignored)
+        expect(FileUtils.identical?(original_icon_path, versioned_icon_path)).to eq(is_ignored)
       end
     end
   end
