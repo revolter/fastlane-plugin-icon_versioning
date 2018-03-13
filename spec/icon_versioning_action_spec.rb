@@ -39,10 +39,6 @@ describe Fastlane::Actions::IconVersioningAction do
 
       action.run(config)
 
-      versioned_appiconset_path = action_helper.get_versioned_path(options[:appiconset_path])
-
-      expect(Pathname.new(versioned_appiconset_path)).to exist
-
       Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
         versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
 
@@ -60,10 +56,6 @@ describe Fastlane::Actions::IconVersioningAction do
       config = configuration.create(action.available_options, options)
 
       action.run(config)
-
-      versioned_appiconset_path = action_helper.get_versioned_path(options[:appiconset_path])
-
-      expect(Pathname.new(versioned_appiconset_path)).to exist
 
       Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
         versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
