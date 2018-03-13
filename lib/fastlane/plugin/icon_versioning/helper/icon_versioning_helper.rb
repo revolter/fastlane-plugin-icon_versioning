@@ -48,12 +48,16 @@ module Fastlane
         Dir.glob("#{self.appiconset_path}/*.png").each do |original_icon_path|
           versioned_icon_path = self.class.get_versioned_path(original_icon_path)
 
+          text_sha = Digest::SHA2.hexdigest(self.text)
+
           unless cache[original_icon_path].nil?
             if File.exist?(versioned_icon_path)
               versioned_icon_sha = Digest::SHA2.file(versioned_icon_path).hexdigest
-              cached_icon_sha = cache[original_icon_path]
 
-              next if versioned_icon_sha == cached_icon_sha
+              cached_text_sha = cache[original_icon_path][:text]
+              cached_icon_sha = cache[original_icon_path][:icon]
+
+              next if text_sha == cached_text_sha && versioned_icon_sha == cached_icon_sha
             end
           end
 
@@ -63,7 +67,10 @@ module Fastlane
             version_icon(original_icon_path, versioned_icon_path)
           end
 
-          cache[original_icon_path] = Digest::SHA2.file(versioned_icon_path).hexdigest
+          cache[original_icon_path] = {}
+
+          cache[original_icon_path][:text] = text_sha
+          cache[original_icon_path][:icon] = Digest::SHA2.file(versioned_icon_path).hexdigest
         end
 
         File.open(cache_file_path, 'w') { |file| file.write(cache.to_yaml) }
