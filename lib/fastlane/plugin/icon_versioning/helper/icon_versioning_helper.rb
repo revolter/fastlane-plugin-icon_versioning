@@ -1,11 +1,17 @@
-require 'fastlane_core/ui/ui'
+require 'digest'
+require 'fileutils'
 require 'mini_magick'
+require 'yaml'
+
+require 'fastlane_core/ui/ui'
 
 module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?('UI')
 
   module Helper
     class IconVersioningHelper
+      CACHE_FILE_NAME = 'cache.yml'.freeze
+
       attr_accessor :appiconset_path
       attr_accessor :text
 
@@ -29,22 +35,46 @@ module Fastlane
       def run()
         versioned_appiconset_path = self.class.get_versioned_path(self.appiconset_path)
 
-        FileUtils.remove_entry(versioned_appiconset_path, force: true)
-        FileUtils.copy_entry(self.appiconset_path, versioned_appiconset_path)
+        Dir.mkdir(versioned_appiconset_path) unless Dir.exist?(versioned_appiconset_path)
 
-        Dir.glob("#{versioned_appiconset_path}/*.png").each do |icon_path|
-          next if self.ignored_icons_regex && !(icon_path =~ self.ignored_icons_regex).nil?
+        cache_file_path = File.join(versioned_appiconset_path, CACHE_FILE_NAME)
 
-          version_icon(icon_path)
+        if File.exist?(cache_file_path)
+          cache = YAML.load_file(cache_file_path)
+        else
+          cache = {}
         end
+
+        Dir.glob("#{self.appiconset_path}/*.png").each do |original_icon_path|
+          versioned_icon_path = self.class.get_versioned_path(original_icon_path)
+
+          unless cache[original_icon_path].nil?
+            if File.exist?(versioned_icon_path)
+              versioned_icon_sha = Digest::SHA2.file(versioned_icon_path).hexdigest
+              cached_icon_sha = cache[original_icon_path]
+
+              next if versioned_icon_sha == cached_icon_sha
+            end
+          end
+
+          if self.ignored_icons_regex && !(original_icon_path =~ self.ignored_icons_regex).nil?
+            FileUtils.copy(original_icon_path, versioned_icon_path)
+          else
+            version_icon(original_icon_path, versioned_icon_path)
+          end
+
+          cache[original_icon_path] = Digest::SHA2.file(versioned_icon_path).hexdigest
+        end
+
+        File.open(cache_file_path, 'w') { |file| file.write(cache.to_yaml) }
       end
 
       def self.get_versioned_path(path)
         return path.gsub(/([^.]+)(\.appiconset)/, '\1-Versioned\2')
       end
 
-      private def version_icon(icon_path)
-        image = MiniMagick::Image.open(icon_path)
+      private def version_icon(original_icon_path, versioned_icon_path)
+        image = MiniMagick::Image.open(original_icon_path)
 
         width = image[:width]
         height = image[:height]
@@ -55,14 +85,14 @@ module Fastlane
 
         band_top_position = height - band_height
 
-        blurred_icon_path = suffix(icon_path, 'blurred')
-        mask_icon_path = suffix(icon_path, 'mask')
-        text_base_icon_path = suffix(icon_path, 'text_base')
-        text_icon_path = suffix(icon_path, 'text')
-        temp_icon_path = suffix(icon_path, 'temp')
+        blurred_icon_path = suffix(versioned_icon_path, 'blurred')
+        mask_icon_path = suffix(versioned_icon_path, 'mask')
+        text_base_icon_path = suffix(versioned_icon_path, 'text_base')
+        text_icon_path = suffix(versioned_icon_path, 'text')
+        temp_icon_path = suffix(versioned_icon_path, 'temp')
 
         MiniMagick::Tool::Convert.new do |convert|
-          convert << icon_path
+          convert << original_icon_path
           convert << '-blur' << "#{band_blur_radius}x#{band_blur_sigma}"
           convert << blurred_icon_path
         end
@@ -94,7 +124,7 @@ module Fastlane
         end
 
         MiniMagick::Tool::Convert.new do |convert|
-          convert << icon_path
+          convert << original_icon_path
           convert << blurred_icon_path
           convert << mask_icon_path
           convert << '-composite'
@@ -111,7 +141,7 @@ module Fastlane
           convert << text_icon_path
           convert << '-geometry' << "+0+#{band_top_position}"
           convert << '-composite'
-          convert << icon_path
+          convert << versioned_icon_path
         end
 
         File.delete(text_base_icon_path, text_icon_path, temp_icon_path)

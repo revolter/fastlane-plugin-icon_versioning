@@ -175,6 +175,7 @@ Style/MethodCallWithArgsParentheses:
   - context
   - before
   - after
+  - to_not
 
 Style/DefWithParentheses:
   Enabled: false
