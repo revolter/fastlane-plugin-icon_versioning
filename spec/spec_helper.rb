@@ -1,11 +1,7 @@
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 
-require 'simplecov'
-
-# SimpleCov.minimum_coverage 95
-SimpleCov.start
-
 require 'coveralls'
+require 'simplecov'
 
 Coveralls.wear!
 
