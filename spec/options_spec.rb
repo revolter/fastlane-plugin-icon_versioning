@@ -1,5 +1,5 @@
-describe Fastlane::Actions::IconVersioningAction do
-  let(:action) { Fastlane::Actions::IconVersioningAction }
+describe Fastlane::Actions::VersionIconAction do
+  let(:action) { Fastlane::Actions::VersionIconAction }
   let(:configuration) { FastlaneCore::Configuration }
 
   context 'when passing the appiconset path' do

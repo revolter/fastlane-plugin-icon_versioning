@@ -16,9 +16,9 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios version_icon
+### ios update_icon
 ```
-fastlane ios version_icon
+fastlane ios update_icon
 ```
 
 

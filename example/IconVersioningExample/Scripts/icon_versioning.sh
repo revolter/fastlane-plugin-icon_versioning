@@ -17,4 +17,4 @@ export FASTLANE_DISABLE_COLORS=1 # optional, to remove from the build log the AN
 export FASTLANE_SKIP_UPDATE_CHECK=1 # optional, to make sure that the versioning finishes as fast as possible in case there is an available update
 export FASTLANE_HIDE_GITHUB_ISSUES=1 # optional, to make sure that the versioning finishes as fast as possible in case the plugin crashes
 
-bundle exec fastlane version_icon configuration:$CONFIGURATION
+bundle exec fastlane update_icon configuration:$CONFIGURATION

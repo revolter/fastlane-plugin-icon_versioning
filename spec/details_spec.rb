@@ -1,5 +1,5 @@
-describe Fastlane::Actions::IconVersioningAction do
-  let(:action) { Fastlane::Actions::IconVersioningAction }
+describe Fastlane::Actions::VersionIconAction do
+  let(:action) { Fastlane::Actions::VersionIconAction }
 
   it 'has a description' do
     description = action.description

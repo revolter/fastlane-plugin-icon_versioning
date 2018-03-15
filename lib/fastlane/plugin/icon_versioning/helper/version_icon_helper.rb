@@ -9,7 +9,7 @@ module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?('UI')
 
   module Helper
-    class IconVersioningHelper
+    class VersionIconHelper
       CACHE_FILE_NAME = 'cache.yml'.freeze
 
       attr_accessor :appiconset_path

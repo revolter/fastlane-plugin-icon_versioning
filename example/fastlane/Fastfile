@@ -1,7 +1,7 @@
 default_platform(:ios)
 
 platform :ios do
-  lane :version_icon do |options|
+  lane :update_icon do |options|
     configuration = options[:configuration]
 
     appiconset_path = './IconVersioningExample/Assets.xcassets/AppIcon.appiconset'
@@ -13,7 +13,7 @@ platform :ios do
 
     text = "#{version} (#{date})\n[#{commit}] {#{configuration}}\n#{branch}"
 
-    icon_versioning(
+    version_icon(
       appiconset_path: appiconset_path,
       text: text,
       band_height_percentage: 0.4,
