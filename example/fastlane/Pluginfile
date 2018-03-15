@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-gem 'fastlane-plugin-icon_versioning'
+gem 'fastlane-plugin-icon_versioning', path: '../..'
