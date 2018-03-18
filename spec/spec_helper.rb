@@ -3,7 +3,12 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'coveralls'
 require 'simplecov'
 
-Coveralls.wear!
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+])
+
+SimpleCov.start
 
 # This module is only used to check the environment is currently a testing env
 module SpecHelper
