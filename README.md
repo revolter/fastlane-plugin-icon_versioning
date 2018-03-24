@@ -54,7 +54,7 @@ export FASTLANE_DISABLE_COLORS=1 # optional, to remove from the build log the AN
 export FASTLANE_SKIP_UPDATE_CHECK=1 # optional, to make sure that the versioning finishes as fast as possible in case there is an available update
 export FASTLANE_HIDE_GITHUB_ISSUES=1 # optional, to make sure that the versioning finishes as fast as possible in case the plugin crashes
 
-bundle exec fastlane run icon_versioning appiconset_path:'/path/to/AppIcon.appiconset' text:'1.2.3 (11.03.2018)\n[ead76f1] {Staging}\nmaster'
+bundle exec fastlane run version_icon appiconset_path:'/path/to/AppIcon.appiconset' text:'1.2.3 (11.03.2018)\n[ead76f1] {Staging}\nmaster'
 ```
 
 _Make sure the script is executable by running `chmod +x /scripts/icon_versioning.sh`_
