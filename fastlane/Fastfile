@@ -1,5 +1,5 @@
 lane :test do
-  icon_versioning(
+  version_icon(
     appiconset_path: './spec/fixtures/Valid.appiconset',
     text: "It\nis\nworking"
   )
