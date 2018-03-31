@@ -76,14 +76,14 @@ module Fastlane
       def version_icon(original_icon_path, versioned_icon_path)
         image = MiniMagick::Image.open(original_icon_path)
 
-        width = image[:width]
-        height = image[:height]
+        image_width = image[:width]
+        image_height = image[:height]
 
-        band_height = height * @band_height_percentage
-        band_blur_radius = width * @band_blur_radius_percentage
-        band_blur_sigma = width * @band_blur_sigma_percentage
+        band_height = image_height * @band_height_percentage
+        band_blur_radius = image_width * @band_blur_radius_percentage
+        band_blur_sigma = image_width * @band_blur_sigma_percentage
 
-        band_top_position = height - band_height
+        band_top_position = image_height - band_height
 
         blurred_icon_path = suffix(versioned_icon_path, 'blurred')
         mask_icon_path = suffix(versioned_icon_path, 'mask')
@@ -101,21 +101,21 @@ module Fastlane
           convert << blurred_icon_path
           convert << '-gamma' << '0'
           convert << '-fill' << 'white'
-          convert << '-draw' << "rectangle 0, #{band_top_position}, #{width}, #{height}"
+          convert << '-draw' << "rectangle 0, #{band_top_position}, #{image_width}, #{image_height}"
           convert << mask_icon_path
         end
 
         MiniMagick::Tool::Convert.new do |convert|
-          convert << '-size' << "#{width}x#{band_height}"
+          convert << '-size' << "#{image_width}x#{band_height}"
           convert << 'xc:none'
           convert << '-fill' << 'rgba(0, 0, 0, 0.2)'
-          convert << '-draw' << "rectangle 0, 0, #{width}, #{band_height}"
+          convert << '-draw' << "rectangle 0, 0, #{image_width}, #{band_height}"
           convert << text_base_icon_path
         end
 
         MiniMagick::Tool::Convert.new do |convert|
           convert << '-background' << 'none'
-          convert << '-size' << "#{width}x#{band_height}"
+          convert << '-size' << "#{image_width}x#{band_height}"
           convert << '-fill' << 'white'
           convert << '-gravity' << 'center'
           # using label instead of caption prevents wrapping long lines
