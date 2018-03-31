@@ -12,28 +12,19 @@ module Fastlane
     class VersionIconHelper
       CACHE_FILE_NAME = 'cache.yml'.freeze
 
-      attr_accessor :appiconset_path
-      attr_accessor :text
-
-      attr_accessor :band_height_percentage
-      attr_accessor :band_blur_radius_percentage
-      attr_accessor :band_blur_sigma_percentage
-
-      attr_accessor :ignored_icons_regex
-
       def initialize(params)
-        self.appiconset_path = File.expand_path(params[:appiconset_path])
-        self.text = params[:text]
+        @appiconset_path = File.expand_path(params[:appiconset_path])
+        @text = params[:text]
 
-        self.band_height_percentage = params[:band_height_percentage]
-        self.band_blur_radius_percentage = params[:band_blur_radius_percentage]
-        self.band_blur_sigma_percentage = params[:band_blur_sigma_percentage]
+        @band_height_percentage = params[:band_height_percentage]
+        @band_blur_radius_percentage = params[:band_blur_radius_percentage]
+        @band_blur_sigma_percentage = params[:band_blur_sigma_percentage]
 
-        self.ignored_icons_regex = params[:ignored_icons_regex]
+        @ignored_icons_regex = params[:ignored_icons_regex]
       end
 
       def run()
-        versioned_appiconset_path = self.class.get_versioned_path(self.appiconset_path)
+        versioned_appiconset_path = self.class.get_versioned_path(@appiconset_path)
 
         Dir.mkdir(versioned_appiconset_path) unless Dir.exist?(versioned_appiconset_path)
 
@@ -45,10 +36,10 @@ module Fastlane
           cache = {}
         end
 
-        Dir.glob("#{self.appiconset_path}/*.png").each do |original_icon_path|
+        Dir.glob("#{@appiconset_path}/*.png").each do |original_icon_path|
           versioned_icon_path = self.class.get_versioned_path(original_icon_path)
 
-          text_sha = Digest::SHA2.hexdigest(self.text)
+          text_sha = Digest::SHA2.hexdigest(@text)
 
           unless cache[original_icon_path].nil?
             if File.exist?(versioned_icon_path)
@@ -61,7 +52,7 @@ module Fastlane
             end
           end
 
-          if self.ignored_icons_regex && !(original_icon_path =~ self.ignored_icons_regex).nil?
+          if @ignored_icons_regex && !(original_icon_path =~ @ignored_icons_regex).nil?
             FileUtils.copy(original_icon_path, versioned_icon_path)
           else
             version_icon(original_icon_path, versioned_icon_path)
@@ -88,9 +79,9 @@ module Fastlane
         width = image[:width]
         height = image[:height]
 
-        band_height = height * self.band_height_percentage
-        band_blur_radius = width * self.band_blur_radius_percentage
-        band_blur_sigma = width * self.band_blur_sigma_percentage
+        band_height = height * @band_height_percentage
+        band_blur_radius = width * @band_blur_radius_percentage
+        band_blur_sigma = width * @band_blur_sigma_percentage
 
         band_top_position = height - band_height
 
@@ -128,7 +119,7 @@ module Fastlane
           convert << '-fill' << 'white'
           convert << '-gravity' << 'center'
           # using label instead of caption prevents wrapping long lines
-          convert << "label:#{self.text}"
+          convert << "label:#{@text}"
           convert << text_icon_path
         end
 
