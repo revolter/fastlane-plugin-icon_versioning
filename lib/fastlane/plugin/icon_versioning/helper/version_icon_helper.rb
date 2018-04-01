@@ -11,6 +11,7 @@ module Fastlane
   module Helper
     class VersionIconHelper
       CACHE_FILE_NAME = 'cache.yml'.freeze
+      CONTENTS_JSON_FILE_NAME = 'Contents.json'.freeze
 
       def initialize(params)
         @appiconset_path = File.expand_path(params[:appiconset_path])
@@ -35,6 +36,8 @@ module Fastlane
         else
           cache = {}
         end
+
+        FileUtils.copy("#{@appiconset_path}/#{CONTENTS_JSON_FILE_NAME}", "#{versioned_appiconset_path}/#{CONTENTS_JSON_FILE_NAME}")
 
         Dir.glob("#{@appiconset_path}/*.png").each do |original_icon_path|
           versioned_icon_path = self.class.get_versioned_path(original_icon_path)
