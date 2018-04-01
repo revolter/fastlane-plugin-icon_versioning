@@ -40,6 +40,19 @@ module Fastlane
             type: String
           ),
           FastlaneCore::ConfigItem.new(
+            key: :text_margins_percentages,
+            env_name: 'VERSION_ICON_TEXT_MARGINS_PERCENTAGES',
+            description: 'The percentages of the text margins relative to the image\'s size. The array must have all four margins: `text_margins_percentages: [top, right, bottom, left]`, two values: `text_margins_percentages: [vertical, horizontal]` or one value for all of them `text_margins: [all]`',
+            default_value: [0.06],
+            verify_block: proc do |value|
+              UI.user_error!('The number of margins is not equal to 1, 2 or 4') unless value.length == 1 || value.length == 2 || value.length == 4
+              UI.user_error!('At least one margin percentage is less than 0') if value.any? { |percentage| percentage < 0 }
+              UI.user_error!('At least one margin percentage is greater than 1') if value.any? { |percentage| percentage > 1 }
+            end,
+            optional: true,
+            type: Array
+          ),
+          FastlaneCore::ConfigItem.new(
             key: :band_height_percentage,
             env_name: 'VERSION_ICON_BAND_HEIGHT_PERCENTAGE',
             description: 'The percentage of the text band height relative to the image\'s height. A float number between 0 and 1',

@@ -36,6 +36,64 @@ describe Fastlane::Actions::VersionIconAction do
     end
   end
 
+  context 'when passing the text margins percentages' do
+    it 'sets the value when it is 1' do
+      options = { text_margins_percentages: [0.1] }
+
+      config = configuration.create(action.available_options, options)
+
+      expect(config[:text_margins_percentages]).to eq(options[:text_margins_percentages])
+    end
+
+    it 'sets the value when they are 2' do
+      options = { text_margins_percentages: [0.1, 0.2] }
+
+      config = configuration.create(action.available_options, options)
+
+      expect(config[:text_margins_percentages]).to eq(options[:text_margins_percentages])
+    end
+
+    it 'sets the value when they are 4' do
+      options = { text_margins_percentages: [0.1, 0.2, 0.3, 0.4] }
+
+      config = configuration.create(action.available_options, options)
+
+      expect(config[:text_margins_percentages]).to eq(options[:text_margins_percentages])
+    end
+
+    it 'raises an exception when they are less than 1' do
+      options = { text_margins_percentages: [] }
+
+      expect do
+        configuration.create(action.available_options, options)
+      end.to raise_error('The number of margins is not equal to 1, 2 or 4')
+    end
+
+    it 'raises an exception when they are greater than 4' do
+      options = { text_margins_percentages: [0.1, 0.2, 0.3, 0.4, 0.5] }
+
+      expect do
+        configuration.create(action.available_options, options)
+      end.to raise_error('The number of margins is not equal to 1, 2 or 4')
+    end
+
+    it 'raises an exception when any of them is less than 0' do
+      options = { text_margins_percentages: [0.1, -1.2] }
+
+      expect do
+        configuration.create(action.available_options, options)
+      end.to raise_error('At least one margin percentage is less than 0')
+    end
+
+    it 'raises an exception when any of them is greater than 1' do
+      options = { text_margins_percentages: [0.1, 0.2, 1.3, 0.4] }
+
+      expect do
+        configuration.create(action.available_options, options)
+      end.to raise_error('At least one margin percentage is greater than 1')
+    end
+  end
+
   context 'when passing the band height percentage' do
     it 'sets the value when it is valid' do
       options = { band_height_percentage: 0.42 }

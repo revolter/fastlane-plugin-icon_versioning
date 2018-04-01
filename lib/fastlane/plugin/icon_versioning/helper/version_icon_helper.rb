@@ -17,6 +17,16 @@ module Fastlane
         @appiconset_path = File.expand_path(params[:appiconset_path])
         @text = params[:text]
 
+        text_margins_percentages = params[:text_margins_percentages]
+
+        text_margins_percentages *= 4 if text_margins_percentages.length == 1
+        text_margins_percentages *= 2 if text_margins_percentages.length == 2
+
+        @text_top_margin_percentage = text_margins_percentages[0]
+        @text_right_margin_percentage = text_margins_percentages[1]
+        @text_bottom_margin_percentage = text_margins_percentages[2]
+        @text_left_margin_percentage = text_margins_percentages[3]
+
         @band_height_percentage = params[:band_height_percentage]
         @band_blur_radius_percentage = params[:band_blur_radius_percentage]
         @band_blur_sigma_percentage = params[:band_blur_sigma_percentage]
@@ -88,6 +98,11 @@ module Fastlane
 
         band_top_position = image_height - band_height
 
+        text_top_margin = image_height * @text_top_margin_percentage
+        text_right_margin = image_width * @text_right_margin_percentage
+        text_bottom_margin = image_height * @text_bottom_margin_percentage
+        text_left_margin = image_width * @text_left_margin_percentage
+
         blurred_icon_path = suffix(versioned_icon_path, 'blurred')
         mask_icon_path = suffix(versioned_icon_path, 'mask')
         text_base_icon_path = suffix(versioned_icon_path, 'text_base')
@@ -118,7 +133,7 @@ module Fastlane
 
         MiniMagick::Tool::Convert.new do |convert|
           convert << '-background' << 'none'
-          convert << '-size' << "#{image_width}x#{band_height}"
+          convert << '-size' << "#{image_width - (text_left_margin + text_right_margin)}x#{band_height - (text_top_margin + text_bottom_margin)}"
           convert << '-fill' << 'white'
           convert << '-gravity' << 'center'
           # using label instead of caption prevents wrapping long lines
@@ -142,7 +157,7 @@ module Fastlane
           convert << '-geometry' << "+0+#{band_top_position}"
           convert << '-composite'
           convert << text_icon_path
-          convert << '-geometry' << "+0+#{band_top_position}"
+          convert << '-geometry' << "+#{text_left_margin}+#{band_top_position + text_top_margin}"
           convert << '-composite'
           convert << versioned_icon_path
         end
