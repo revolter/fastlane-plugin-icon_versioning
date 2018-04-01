@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2018-04-02
+
+### Added
+
+- Added text margins percentages config item (f1c5594)
+
+### Fixed
+
+- Fixed Contents.json file not being copied to the versioned appiconset directory (4053a2a)
+
 ## [1.1.2] - 2018-03-16
 
 ### Deprecated
@@ -33,7 +43,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added initial versioning implementation (b30440b)
 
-[Unreleased]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.1.2...master
+[Unreleased]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.2.0...master
+[1.2.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.0.0...v1.1.0
