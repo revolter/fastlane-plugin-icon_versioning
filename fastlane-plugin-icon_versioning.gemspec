@@ -1,6 +1,4 @@
-# coding: utf-8
-
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fastlane/plugin/icon_versioning/version'
 
@@ -23,14 +21,14 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('mini_magick')
 
-  spec.add_development_dependency('pry')
   spec.add_development_dependency('bundler')
+  spec.add_development_dependency('coveralls')
+  spec.add_development_dependency('fastlane')
+  spec.add_development_dependency('pry')
+  spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec')
   spec.add_development_dependency('rspec_junit_formatter')
-  spec.add_development_dependency('rake')
   spec.add_development_dependency('rubocop')
   spec.add_development_dependency('rubocop-require_tools')
   spec.add_development_dependency('simplecov')
-  spec.add_development_dependency('fastlane')
-  spec.add_development_dependency('coveralls')
 end

@@ -19,7 +19,7 @@ Metrics/BlockLength:
   Enabled: false
 Metrics/ModuleLength:
   Enabled: false
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 Style/MethodMissing:
   Enabled: false
@@ -36,18 +36,6 @@ Style/BracesAroundHashParameters:
 Lint/UselessAssignment:
   Exclude:
   - "**/spec/**/*"
-Require/MissingRequireStatement:
-  Exclude:
-  - "**/spec/**/*.rb"
-  - "**/spec_helper.rb"
-  - spaceship/lib/spaceship/babosa_fix.rb
-  - "**/Fastfile"
-  - "**/*.gemspec"
-  - rakelib/**/*
-  - "**/*.rake"
-  - "**/Rakefile"
-  - fastlane/**/*
-  - supply/**/*
 Layout/IndentArray:
   EnforcedStyle: consistent
 Layout/IndentHash:
@@ -114,7 +102,7 @@ Lint/UnusedMethodArgument:
 Lint/ParenthesesAsGroupedExpression:
   Exclude:
   - "**/spec/**/*"
-Style/PredicateName:
+Naming/PredicateName:
   Enabled: false
 Style/PerlBackrefs:
   Enabled: false
@@ -123,7 +111,7 @@ Layout/SpaceAroundOperators:
   - "**/spec/actions_specs/xcodebuild_spec.rb"
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.1
   Include:
   - "*/lib/assets/*Template"
   - "*/lib/assets/*TemplateAndroid"
@@ -131,7 +119,7 @@ AllCops:
   - "**/lib/assets/custom_action_template.rb"
   - "./vendor/**/*"
   - "**/lib/assets/DefaultFastfileTemplate"
-Style/FileName:
+Naming/FileName:
   Exclude:
   - "**/Dangerfile"
   - "**/Brewfile"
@@ -152,9 +140,6 @@ Style/IfInsideElse:
   Enabled: false
 Style/CollectionMethods:
   Enabled: false
-CrossPlatform/ForkUsage:
-  Exclude:
-  - "**/plugins/template/**/*"
 Style/MethodCallWithArgsParentheses:
   Enabled: true
   IgnoredMethods:
