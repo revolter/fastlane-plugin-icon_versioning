@@ -22,7 +22,7 @@ Overlay build information on top of your app icon. Based on original work by Krz
 Over the original implementation by Krzysztof, I also added:
 - automatic font scaling and blur spreading that ensures a consistent look between different sized icons
 - text lines preservation that doesn't break long lines to prevent unexpected results
-- possibility to specify custom text, band height, blur spread that remain responsive to the icon sizes
+- possibility to specify custom text, text margins, band height, blur spread that remain responsive to the icon sizes
 
 ### Integrating
 
