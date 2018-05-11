@@ -1,7 +1,7 @@
 # icon_versioning plugin
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-icon_versioning)
-[![Build Status](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning.svg?branch=master)](https://travis-ci.org/revolter/fastlane-plugin-icon_versioning)
+[![Build Status](https://travis-ci.com/revolter/fastlane-plugin-icon_versioning.svg?branch=master)](https://travis-ci.com/revolter/fastlane-plugin-icon_versioning)
 [![Coverage Status](https://coveralls.io/repos/github/revolter/fastlane-plugin-icon_versioning/badge.svg)](https://coveralls.io/github/revolter/fastlane-plugin-icon_versioning)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c25b5a17cfad82881a70/maintainability)](https://codeclimate.com/github/revolter/fastlane-plugin-icon_versioning/maintainability)
 
