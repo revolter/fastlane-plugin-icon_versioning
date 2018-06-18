@@ -50,7 +50,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :text_margins_percentages,
             env_name: 'VERSION_ICON_TEXT_MARGINS_PERCENTAGES',
-            description: 'The percentages of the text margins relative to the image\'s size. The array must have all four margins: `text_margins_percentages: [top, right, bottom, left]`, two values: `text_margins_percentages: [vertical, horizontal]` or one value for all of them `text_margins: [all]`',
+            description: 'Optional percentages of the text margins relative to the image\'s size. The array must have all four margins: `text_margins_percentages: [top, right, bottom, left]`, two values: `text_margins_percentages: [vertical, horizontal]` or one value for all of them: `text_margins: [all]`',
             default_value: [0.06],
             verify_block: proc do |value|
               UI.user_error!('The number of margins is not equal to 1, 2 or 4') unless value.length == 1 || value.length == 2 || value.length == 4
@@ -63,7 +63,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :band_height_percentage,
             env_name: 'VERSION_ICON_BAND_HEIGHT_PERCENTAGE',
-            description: 'The percentage of the text band height relative to the image\'s height. A float number between 0 and 1',
+            description: 'Optional percentage of the text band height relative to the image\'s height. A float number between 0 and 1',
             default_value: 0.5,
             verify_block: proc do |value|
               UI.user_error!('Band height percentage is less than 0') if value < 0
@@ -75,7 +75,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :band_blur_radius_percentage,
             env_name: 'VERSION_ICON_BAND_BLUR_RADIUS_PERCENTAGE',
-            description: 'The blur radius percentage of the text band. The default value behaves like an automatic setting which produces the best results. More details: http://www.imagemagick.org/Usage/blur/#blur_args',
+            description: 'Optional blur radius percentage of the text band. The default value behaves like an automatic setting which produces the best results. More details: http://www.imagemagick.org/Usage/blur/#blur_args',
             default_value: 0,
             verify_block: proc do |value|
               UI.user_error!('Band blur radius percentage is less than 0') if value < 0
@@ -86,7 +86,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :band_blur_sigma_percentage,
             env_name: 'VERSION_ICON_BAND_BLUR_SIGMA_PERCENTAGE',
-            description: 'The blur sigma percentage of the text band. More details: http://www.imagemagick.org/Usage/blur/#blur_args',
+            description: 'Optional blur sigma percentage of the text band. More details: http://www.imagemagick.org/Usage/blur/#blur_args',
             default_value: 0.05,
             verify_block: proc do |value|
               UI.user_error!('Band blur sigma percentage is less than 0') if value < 0
@@ -98,7 +98,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :ignored_icons_regex,
             env_name: 'VERSION_ICON_IGNORED_ICONS_REGEX',
-            description: 'An optional regex that causes the icons that match agains it not to be versioned',
+            description: 'Optional regex that causes the icons that match against it not to be versioned',
             optional: true,
             type: Regexp
           )
