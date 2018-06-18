@@ -135,7 +135,7 @@ module Fastlane
         MiniMagick::Tool::Convert.new do |convert|
           convert << '-background' << 'none'
           convert << '-size' << "#{image_width - (text_left_margin + text_right_margin)}x#{band_height - (text_top_margin + text_bottom_margin)}"
-          convert << '-fill' << "#{@color}"
+          convert << '-fill' << @color
           convert << '-gravity' << 'center'
           # using label instead of caption prevents wrapping long lines
           convert << "label:#{@text}"
