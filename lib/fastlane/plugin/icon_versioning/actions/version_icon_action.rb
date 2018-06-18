@@ -40,6 +40,14 @@ module Fastlane
             type: String
           ),
           FastlaneCore::ConfigItem.new(
+            key: :text_color,
+            env_name: 'VERSION_ICON_TEXT_COLOR',
+            description: 'Optional color for the text overlaying the icon images. It must be a color name (`red`) or a set of numbers as described here: https://www.imagemagick.org/script/color.php',
+            default_value: 'white',
+            optional: true,
+            type: String
+          ),
+          FastlaneCore::ConfigItem.new(
             key: :text_margins_percentages,
             env_name: 'VERSION_ICON_TEXT_MARGINS_PERCENTAGES',
             description: 'The percentages of the text margins relative to the image\'s size. The array must have all four margins: `text_margins_percentages: [top, right, bottom, left]`, two values: `text_margins_percentages: [vertical, horizontal]` or one value for all of them `text_margins: [all]`',
@@ -93,14 +101,6 @@ module Fastlane
             description: 'An optional regex that causes the icons that match agains it not to be versioned',
             optional: true,
             type: Regexp
-          ),
-          FastlaneCore::ConfigItem.new(
-            key: :text_color,
-            env_name: 'VERSION_ICON_TEXT_COLOR',
-            default_value: 'white',
-            description: 'A color of the text overlaying the icon images. A HEX value or a color name will work here',
-            optional: true,
-            type: String
           )
         ]
       end
