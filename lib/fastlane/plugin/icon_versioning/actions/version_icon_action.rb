@@ -101,6 +101,14 @@ module Fastlane
             description: 'Optional regex that causes the icons that match against it not to be versioned',
             optional: true,
             type: Regexp
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :text_color,
+            env_name: 'VERSION_ICON_TEXT_COLOR',
+            default_value: 'white',
+            description: 'A color of the text overlaying the icon images. A HEX value or a color name will work here',
+            optional: true,
+            type: String
           )
         ]
       end

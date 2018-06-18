@@ -17,6 +17,7 @@ module Fastlane
         @appiconset_path = File.expand_path(params[:appiconset_path])
         @text = params[:text]
         @text_color = params[:text_color]
+        @color = params[:text_color]
 
         text_margins_percentages = params[:text_margins_percentages]
 
@@ -136,6 +137,7 @@ module Fastlane
           convert << '-background' << 'none'
           convert << '-size' << "#{image_width - (text_left_margin + text_right_margin)}x#{band_height - (text_top_margin + text_bottom_margin)}"
           convert << '-fill' << @text_color
+          convert << '-fill' << "#{@color}"
           convert << '-gravity' << 'center'
           # using label instead of caption prevents wrapping long lines
           convert << "label:#{@text}"
