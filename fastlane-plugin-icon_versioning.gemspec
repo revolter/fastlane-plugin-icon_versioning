@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('mini_magick', '>= 4.5.1')
 
-  spec.add_development_dependency('bundler', '>= 1.12.0', '< 2.0.0')
+  spec.add_development_dependency('bundler', '>= 1.12.0')
   spec.add_development_dependency('coveralls', '~> 0.7.2')
   spec.add_development_dependency('fastlane', '>= 2.89.0')
   spec.add_development_dependency('pry', '~> 0.11.3')
