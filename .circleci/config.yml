@@ -22,7 +22,11 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: install dependencies
+          name: install system dependencies
+          command: sudo apt-get update && sudo apt-get install ghostscript
+
+      - run:
+          name: install code dependencies
           command: bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
