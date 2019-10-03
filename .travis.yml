@@ -1,4 +1,6 @@
-# os: osx # enable this if you need macOS support
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y ghostscript
 language: ruby
 rvm:
   - 2.2.4
