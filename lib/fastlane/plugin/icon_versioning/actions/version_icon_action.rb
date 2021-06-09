@@ -34,6 +34,14 @@ module Fastlane
             type: String
           ),
           FastlaneCore::ConfigItem.new(
+            key: :versioned_appiconset_suffix,
+            env_name: 'VERSIONED_ICON_VERSIONED_APPICONSET_SUFFIX',
+            description: 'The suffix for the versioned appiconset',
+            default_value: 'Versioned',
+            optional: true,
+            type: String
+          ),
+          FastlaneCore::ConfigItem.new(
             key: :text,
             env_name: 'VERSION_ICON_TEXT',
             description: 'The text to overlay over the icon images',

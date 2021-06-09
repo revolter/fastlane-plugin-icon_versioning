@@ -15,6 +15,7 @@ module Fastlane
 
       def initialize(params)
         @appiconset_path = File.expand_path(params[:appiconset_path])
+        @versioned_appiconset_suffix = params[:versioned_appiconset_suffix]
         @text = params[:text]
         @text_color = params[:text_color]
 
@@ -36,7 +37,7 @@ module Fastlane
       end
 
       def run()
-        versioned_appiconset_path = self.class.get_versioned_path(@appiconset_path)
+        versioned_appiconset_path = self.class.get_versioned_path(@appiconset_path, @versioned_appiconset_suffix)
 
         Dir.mkdir(versioned_appiconset_path) unless Dir.exist?(versioned_appiconset_path)
 
@@ -51,7 +52,7 @@ module Fastlane
         FileUtils.copy("#{@appiconset_path}/#{CONTENTS_JSON_FILE_NAME}", "#{versioned_appiconset_path}/#{CONTENTS_JSON_FILE_NAME}")
 
         Dir.glob("#{@appiconset_path}/*.png").each do |original_icon_path|
-          versioned_icon_path = self.class.get_versioned_path(original_icon_path)
+          versioned_icon_path = self.class.get_versioned_path(original_icon_path, @versioned_appiconset_suffix)
 
           text_sha = Digest::SHA2.hexdigest(@text)
 
@@ -81,8 +82,8 @@ module Fastlane
         File.open(cache_file_path, 'w') { |file| file.write(cache.to_yaml) }
       end
 
-      def self.get_versioned_path(path)
-        return path.gsub(/([^.]+)(\.appiconset)/, '\1-Versioned\2')
+      def self.get_versioned_path(path, suffix)
+        return path.gsub(/([^.]+)(\.appiconset)/, "\\1-#{suffix}\\2")
       end
 
       private
