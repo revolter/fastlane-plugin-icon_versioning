@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.4.0] - 2021-06-09
+
+### Added
+
+- Added additional parameter to customize the generated appiconset suffix (#9)
+
 ## [1.3.1] - 2019-09-09
 
 ### Changed
@@ -55,7 +61,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added initial versioning implementation (b30440b)
 
-[Unreleased]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.3.1...master
+[Unreleased]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.4.0...master
+[1.4.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/revolter/fastlane-plugin-icon_versioning/compare/v1.1.2...v1.2.0
