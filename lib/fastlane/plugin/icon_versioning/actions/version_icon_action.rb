@@ -36,7 +36,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :versioned_appiconset_suffix,
             env_name: 'VERSION_ICON_VERSIONED_APPICONSET_SUFFIX',
-            description: 'The suffix for the versioned appiconset',
+            description: 'The suffix for the versioned `.appiconset` directory',
             default_value: 'Versioned',
             optional: true,
             type: String
