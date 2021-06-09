@@ -5,9 +5,10 @@ describe Fastlane::Actions::IconVersioningAction do
 
   describe '#run' do
     let(:original_appiconset_path) { './spec/fixtures/Valid.appiconset' }
+    let(:versioned_appiconset_suffix) { 'Versioned' }
 
     before(:each) do
-      versioned_appiconset_path = action_helper.get_versioned_path(original_appiconset_path)
+      versioned_appiconset_path = action_helper.get_versioned_path(original_appiconset_path, versioned_appiconset_suffix)
 
       FileUtils.remove_entry(versioned_appiconset_path, force: true)
     end

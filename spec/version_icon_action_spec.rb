@@ -5,9 +5,10 @@ describe Fastlane::Actions::VersionIconAction do
 
   describe '#run' do
     let(:original_appiconset_path) { './spec/fixtures/Valid.appiconset' }
+    let(:versioned_appiconset_suffix) { 'Versioned' }
 
     before(:each) do
-      versioned_appiconset_path = action_helper.get_versioned_path(original_appiconset_path)
+      versioned_appiconset_path = action_helper.get_versioned_path(original_appiconset_path, versioned_appiconset_suffix)
 
       FileUtils.remove_entry(versioned_appiconset_path, force: true)
     end
@@ -15,6 +16,7 @@ describe Fastlane::Actions::VersionIconAction do
     it 'versions the icons in the appiconset directory' do
       options = {
         appiconset_path: original_appiconset_path,
+        versioned_appiconset_suffix: versioned_appiconset_suffix,
         text: 'test'
       }
 
@@ -24,7 +26,7 @@ describe Fastlane::Actions::VersionIconAction do
 
       action.run(config)
 
-      versioned_appiconset_path = action_helper.get_versioned_path(options[:appiconset_path])
+      versioned_appiconset_path = action_helper.get_versioned_path(options[:appiconset_path], options[:versioned_appiconset_suffix])
 
       expect(Pathname.new(versioned_appiconset_path)).to exist
     end
@@ -40,7 +42,7 @@ describe Fastlane::Actions::VersionIconAction do
       action.run(config)
 
       Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
-        versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
+        versioned_icon_path = action_helper.get_versioned_path(original_icon_path, versioned_appiconset_suffix)
 
         expect(FileUtils.identical?(original_icon_path, versioned_icon_path)).to be false
       end
@@ -58,7 +60,7 @@ describe Fastlane::Actions::VersionIconAction do
       action.run(config)
 
       Dir.glob("#{original_appiconset_path}/*.png").each do |original_icon_path|
-        versioned_icon_path = action_helper.get_versioned_path(original_icon_path)
+        versioned_icon_path = action_helper.get_versioned_path(original_icon_path, versioned_appiconset_suffix)
 
         is_ignored = !(original_icon_path =~ options[:ignored_icons_regex]).nil?
 
